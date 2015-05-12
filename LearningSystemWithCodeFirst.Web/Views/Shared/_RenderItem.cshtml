@@ -1,0 +1,86 @@
+﻿@model dynamic
+@using LearningSystemWithCodeFirst.Web.Utils;
+@{
+    var dividedModel = Extensions.DivideListToThree(Model);
+}
+
+<div class="col-md-4 col-sm-6">
+    @foreach (var item in dividedModel[0])
+    {
+        <a href="@Url.Action((string)ViewData["View"], (string)ViewData["Controller"], new { id = item.Id })">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @if ((bool)ViewData["HasLogo"])
+                    {
+                        if (item.ImagePath != null)
+                        {
+                            <img src="@Url.Content(ImageFactory.GetFilePath(item.ImagePath))" width="180" height="179" class="img-responsive center-block" />
+                        }
+                    }
+                    <h4>@item.Name</h4>
+                </div>
+                @if ((bool)ViewData["HasDescription"])
+                {
+                    <div class="panel-body">
+                        <!-- Render description in pure Html for the tinyMCE editor -->
+                        @Html.Raw(Extensions.Truncate(item.Description, 50))
+                    </div>
+                }
+            </div>
+        </a>
+    }
+</div>
+
+<div class="col-md-4 col-sm-6">
+    @foreach (var item in dividedModel[1])
+    {
+        <a href="@Url.Action((string)ViewData["View"], (string)ViewData["Controller"], new { id = item.Id })">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @if ((bool)ViewData["HasLogo"])
+                    {
+                        if (item.ImagePath != null)
+                        {
+                            <img src="@Url.Content(ImageFactory.GetFilePath(item.ImagePath))" width="180" height="179" class="img-responsive center-block" />
+                        }
+                    }
+                    <h4>@item.Name</h4>
+                </div>
+                @if ((bool)ViewData["HasDescription"])
+                {
+                    <div class="panel-body">
+                        <!-- Render description in pure Html for the tinyMCE editor -->
+                        @Html.Raw(Extensions.Truncate(item.Description, 40))
+                    </div>
+                }
+            </div>
+        </a>
+    }
+</div>
+
+<div class="col-md-4 col-sm-6">
+    @foreach (var item in dividedModel[2])
+    {
+        <a href="@Url.Action((string)ViewData["View"], (string)ViewData["Controller"], new { id = item.Id })">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @if ((bool)ViewData["HasLogo"])
+                    {
+                        if (item.ImagePath != null)
+                        {
+                            <img src="@Url.Content(ImageFactory.GetFilePath(item.ImagePath))" width="180" height="179" class="img-responsive center-block" />
+                        }
+                    }
+                    <h4>@item.Name</h4>
+                </div>
+                @if ((bool)ViewData["HasDescription"])
+                {
+                    <div class="panel-body">
+                        <!-- Render description in pure Html for the tinyMCE editor -->
+                        @Html.Raw(Extensions.Truncate(item.Description, 60))
+                    </div>
+                }
+            </div>
+        </a>
+    }
+</div>

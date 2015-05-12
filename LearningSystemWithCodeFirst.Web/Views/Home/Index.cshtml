@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CategoryModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Learning system</h1>
+    <p class="lead">This is a test platform designed for educational purposes only.</p>
+    <p><a href="~/Home/About" class="btn btn-primary btn-large">About author &raquo;</a></p>
+</div>
+
+
+<div class="row">
+    @Html.Partial("_RenderItem", Model,
+                    new ViewDataDictionary { { "View", "View" }, { "Controller", "Category" }, { "HasLogo", true },
+                        { "HasDescription", true } })
+</div>

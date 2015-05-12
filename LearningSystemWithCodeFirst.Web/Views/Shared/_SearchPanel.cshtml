@@ -1,0 +1,17 @@
+﻿@model SearchModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="form-group">
+            <input type="text" id="search_input" class="form-control custom" placeholder="Search">
+        </div>
+    </div>
+    <div class="panel-body">
+        <ul id="search_list" class="nav nav-list tree">
+            @foreach (var item in Model.Children)
+            {
+                <li>@Html.ActionLink(item.Name, "View", "Lesson", new { id = item.Id }, null)</li>
+            }
+        </ul>
+    </div>
+</div>

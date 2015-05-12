@@ -1,0 +1,52 @@
+﻿@model CategoryModel
+@{
+    ViewBag.Title = "Edit category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit category</h2>
+<div class="row">
+    <section>
+        @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "tinymce-text-area", rows = "13" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImagePath, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    <img src="@(Model.ImagePath != null ? Url.Content(ImageFactory.GetFilePath(Model.ImagePath)) : Url.Content(Constants.NoImage))" width="200" />
+                    <!-- set hidden value for to fill the model -->
+                    @Html.HiddenFor(m => m.ImagePath)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Set new image", new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    <input type="file" name="file" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6">
+                    <input type="submit" value="Edit" class="btn btn-warning" />
+                </div>
+            </div>
+        }
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

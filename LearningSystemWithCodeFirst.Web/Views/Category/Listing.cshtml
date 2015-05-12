@@ -1,0 +1,11 @@
+﻿@model IEnumerable<CategoryModel>
+@{
+    ViewBag.Title = "All categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Partial("_RenderItem", Model,
+                new ViewDataDictionary { { "View", "View" }, { "Controller", "Category" }, { "HasLogo", true },
+                    { "HasDescription", true } })
+</div>

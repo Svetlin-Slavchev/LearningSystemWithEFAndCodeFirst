@@ -1,0 +1,18 @@
+﻿@model AuthorModel
+@{
+    ViewBag.Title = "About author";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@(Model.ImagePath != null ? Url.Content(ImageFactory.GetFilePath(Model.ImagePath)) : Url.Content("~/Content/Images/noImage.jpg"))" width="200" />
+    </div>
+    <div class="col-md-8">
+        <h2>Svetlin Slavchev</h2>
+        <p>Mobile: @Model.Mobile</p>
+        <p>E-mail: @Model.Email</p>
+    </div>
+</div>
+<div>
+    @Html.Raw(Model.Description)
+</div>

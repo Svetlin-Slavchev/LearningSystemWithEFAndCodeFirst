@@ -1,0 +1,42 @@
+﻿@model CategoryModel
+@{
+    ViewBag.Title = "View category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@(Model.ImagePath != null ? Url.Content(ImageFactory.GetFilePath(Model.ImagePath)) : Url.Content(Constants.NoImage))" width="200" />
+    </div>
+    <div class="col-md-8">
+        @if (User.IsInRole(Constants.ADMIN))
+        {
+            @Html.ActionLink("Edit", "Edit", "Category", new { id = Model.Id }, new { @class = "btn btn-warning" })
+            <a data-itemid="@Model.Id" data-toggle="modal" data-target="#deleteModal" class="delete btn btn-danger">Delete</a>
+        }
+        <h2>@Model.Name</h2>
+        <p>@Html.Raw(Model.Description)</p>
+    </div>
+</div>
+
+<div class="row">
+    <h2>All lessons</h2>
+    <div class="col-md-3">
+        @Html.Partial("_SearchPanel", new SearchModel(Model.Id))
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @if (User.IsInRole(Constants.ADMIN))
+            {
+                @Html.ActionLink("Create", "Create", "Lesson", null, new { @class = "btn btn-success" });<br />
+            }
+            <div class="row">
+                @Html.Partial("_RenderItem", Model.Lessons,
+                new ViewDataDictionary { { "View", "View" }, { "Controller", "Lesson" }, { "HasLogo", true },
+                    { "HasDescription", true } })
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Delete")
